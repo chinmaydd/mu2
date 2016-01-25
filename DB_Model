@@ -1,0 +1,107 @@
+~~~~~~ User:
+
+has_a:
+Name
+
+Wall(hypothetical):
+
+has_many:
+Posts
+
+~~~~~~ Post:
+
+has_a:
+Author(User/Musician/Band)
+Description
+Genre
+Instrument
+Location
+Date_Range
+is_satisfied? (boolean)
+
+~~~~~~  Musician:
+
+has_a:
+Name
+Picture
+Description
+Contact Number
+Current Job(Job)
+
+has_many:
+Posts
+Genre
+Instruments
+(past) Jobs
+Certifications (String)
+Awards(String)
+Songs(String)
+Online Profiles
+Favorite Artists(Bands/Musicians/String)
+Location
+Posts
+
+belongs_to:
+Bands
+
+~~~~~~ Genre:
+
+has_a:
+Name
+
+has_many:
+(is_played_by) Musicians
+(is_played_by) Bands
+
+~~~~~~ Instrument:
+
+has_a:
+Name
+Type
+Experience Level (Either out of 5, or as a description)
+
+has_many:
+(is played by) Musicians
+(is played_by) Bands
+
+~~~~~~ Job:
+
+has_a:
+Description
+start_date
+end_date
+duration
+worked_at: Band
+Location
+
+~~~~~~ Location:
+
+has_a:
+Name
+
+~~~~~~ Peformances:
+
+has_a:
+Performing Entity: (Musician/Band)
+Location
+Description
+Date
+Link
+
+~~~~~~ Band:
+
+has_a:
+Name
+Picture
+Description
+// ** Owner
+
+has_many:
+Posts
+Genre
+Members (Musicians)
+Favorite Artists(Bands/Musicians/String)
+Awards(String)
+Songs(String)
+Location
+Online Profiles
