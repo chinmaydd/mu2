@@ -1,4 +1,5 @@
 # AggregatorAppForMusicians
+
 A social-network like (web)application for musicians and bands alike
 
 The project aims to develop an all­in­one application for musicians around India. The application should serve(almost) a complete social network for vocalists, drummers and guitarists alike. A similar app does exists but not for India.
