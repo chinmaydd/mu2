@@ -93,8 +93,11 @@ ActiveRecord::Schema.define(version: 20160202085510) do
     t.date     "start_date"
     t.date     "end_date"
     t.boolean  "is_satisfied"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "postable_type"
+    t.integer  "postable_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
   end
 
   create_table "users", force: :cascade do |t|
