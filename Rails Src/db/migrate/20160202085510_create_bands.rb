@@ -8,11 +8,9 @@ class CreateBands < ActiveRecord::Migration[5.0]
       t.text :awards
       t.text :songs
       t.text :online_profiles
-      
-      t.references :performable, polymorphic: true, index: true
-      t.references :locatable, polymorphic: true, index: true
+
       t.references :postable, polymorphic: true, index: true
-      
+
       t.timestamps
     end
   end

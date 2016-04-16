@@ -4,8 +4,16 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     @posts = Post.all
-
-    render json: {posts: @posts}
+    @search_results = @posts.map{ |p|
+        j = JSON.parse(p.to_json)
+        begin
+          j["user"] = JSON.parse(p.postable.to_json)
+        rescue JSON::ParserError
+          j["user"] = {"name": "TestUser"}
+        end
+        j
+    }
+    render json: {posts: @search_results}
   end
 
   # GET /posts/1
@@ -16,6 +24,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
+    @post.postable = User.where(:name => "chinmay").first
 
     if @post.save
       render json: @post, status: :created, location: @post
@@ -46,6 +55,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:description, :start_date, :end_date, :is_satisfied)
+      params.require(:post).permit(:title, :description, :start_date, :end_date, :is_satisfied)
     end
 end

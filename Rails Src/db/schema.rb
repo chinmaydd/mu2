@@ -21,32 +21,13 @@ ActiveRecord::Schema.define(version: 20160202085510) do
     t.text     "awards"
     t.text     "songs"
     t.text     "online_profiles"
-    t.string   "performable_type"
-    t.integer  "performable_id"
-    t.string   "locatable_type"
-    t.integer  "locatable_id"
     t.string   "postable_type"
     t.integer  "postable_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["locatable_type", "locatable_id"], name: "index_bands_on_locatable_type_and_locatable_id"
-    t.index ["performable_type", "performable_id"], name: "index_bands_on_performable_type_and_performable_id"
-    t.index ["postable_type", "postable_id"], name: "index_bands_on_postable_type_and_postable_id"
   end
 
-  create_table "genres", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "instruments", force: :cascade do |t|
-    t.string   "name"
-    t.string   "type"
-    t.integer  "exp_level"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "bands", ["postable_type", "postable_id"], name: "index_bands_on_postable_type_and_postable_id"
 
   create_table "jobs", force: :cascade do |t|
     t.text     "description"
@@ -56,36 +37,17 @@ ActiveRecord::Schema.define(version: 20160202085510) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "locations", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "musicians", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "contact_number"
-    t.string   "performable_type"
-    t.integer  "performable_id"
     t.string   "postable_type"
     t.integer  "postable_id"
-    t.string   "locatable_type"
-    t.integer  "locatable_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["locatable_type", "locatable_id"], name: "index_musicians_on_locatable_type_and_locatable_id"
-    t.index ["performable_type", "performable_id"], name: "index_musicians_on_performable_type_and_performable_id"
-    t.index ["postable_type", "postable_id"], name: "index_musicians_on_postable_type_and_postable_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  create_table "performances", force: :cascade do |t|
-    t.text     "description"
-    t.date     "date"
-    t.string   "link"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
+  add_index "musicians", ["postable_type", "postable_id"], name: "index_musicians_on_postable_type_and_postable_id"
 
   create_table "posts", force: :cascade do |t|
     t.text     "title"
@@ -97,8 +59,9 @@ ActiveRecord::Schema.define(version: 20160202085510) do
     t.integer  "postable_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
   end
+
+  add_index "posts", ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -107,7 +70,8 @@ ActiveRecord::Schema.define(version: 20160202085510) do
     t.integer  "postable_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["postable_type", "postable_id"], name: "index_users_on_postable_type_and_postable_id"
   end
+
+  add_index "users", ["postable_type", "postable_id"], name: "index_users_on_postable_type_and_postable_id"
 
 end
