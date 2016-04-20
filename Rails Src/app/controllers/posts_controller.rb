@@ -24,7 +24,20 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
-    @post.postable = User.where(:name => "chinmay").first
+
+    if User.where(:name => params["user"]).first.nil?
+      author = User.new
+      author.email = params["email"]
+      author.name = params["user"]
+      if author.save
+        @post.postable = author
+      else
+        render json: author.errors, status: :unprocessable_entity
+      end
+    else
+      author = User.where(:name => params["user"]).first
+      @post.postable = author
+    end
 
     if @post.save
       render json: @post, status: :created, location: @post
@@ -55,6 +68,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:title, :description, :start_date, :end_date, :is_satisfied)
+      params.require(:post).permit(:title, :user, :email, :description, :start_date, :end_date, :is_satisfied)
     end
 end
