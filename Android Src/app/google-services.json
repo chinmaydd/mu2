@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_id": "musician2-1287",
+    "project_number": "203424816693",
+    "name": "musician2"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203424816693:android:87ab52c4346ae492",
+        "client_id": "android:chinmaydd.mu2",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "chinmaydd.mu2",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203424816693-116vip3e1mab71sotqgvvjism6c57292.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "chinmaydd.mu2",
+            "certificate_hash": "356710F43BF39CD76B04D73343580465DE14427C"
+          }
+        },
+        {
+          "client_id": "203424816693-2973jih9pcu5q6d7imj3hb86i6vsnaip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
