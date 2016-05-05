@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:update, :destroy]
 
   # GET /users
   def index
@@ -8,14 +8,18 @@ class UsersController < ApplicationController
     render json: @users
   end
 
-  # GET /users/1
+  # GET /users/:email
   def show
+    temp = params[:id]
+    @user = User.where(["email LIKE ?", "#{temp}%"]).first
     render json: @user
   end
 
   # POST /users
   def create
-    @user = User.new(user_params)
+    @user = User.new
+    @user.name = params["name"]
+    @user.email = params["email"]
 
     if @user.save
       render json: @user, status: :created, location: @user
@@ -41,11 +45,10 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.permit(:name, :email)
     end
 end

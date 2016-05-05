@@ -1,28 +1,24 @@
 package chinmaydd.mu2.ui.quote;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import butterknife.Bind;
-//import chinmaydd.mu2;
 import chinmaydd.mu2.R;
-import chinmaydd.mu2.dummy.DummyContent;
-import chinmaydd.mu2.ui.ProfileActivity;
 import chinmaydd.mu2.ui.base.BaseActivity;
 import chinmaydd.mu2.ui.base.BaseFragment;
 
@@ -31,17 +27,16 @@ import chinmaydd.mu2.ui.base.BaseFragment;
  *
  * Created by Andreas Schrade on 14.12.2015.
  */
-public class ArticleDetailFragment extends BaseFragment {
+public class ViewProfileFragment extends BaseFragment {
 
     /**
      * The argument represents the dummy item ID of this fragment.
      */
-    public static String ARG_ITEM_ID = "item_id";
+    public static final String ARG_ITEM_ID = "item_id";
 
     /**
      * The dummy content of this fragment.
      */
-    private DummyContent.DummyItem dummyItem;
 
     @Bind(R.id.quote)
     TextView quote;
@@ -49,14 +44,14 @@ public class ArticleDetailFragment extends BaseFragment {
     @Bind(R.id.author)
     TextView author;
 
-    @Bind(R.id.location)
-    TextView location;
-
     @Bind(R.id.backdrop)
     ImageView backdropImg;
 
-    @Bind(R.id.profile_link)
-    FloatingActionButton button;
+    @Bind(R.id.instrument)
+    TextView instrument;
+
+    @Bind(R.id.location)
+    TextView location;
 
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
@@ -67,8 +62,26 @@ public class ArticleDetailFragment extends BaseFragment {
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // load dummy item by using the passed item ID.
-            dummyItem = DummyContent.ITEMS.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)));
-            Log.d("dummy", DummyContent.ITEMS.toString());
+            String url = "http://172.20.10.2:3000/users/" + Global.Email.split("@")[0];
+
+            Ion.with(this)
+                    .load(url)
+                    .asJsonObject()
+                    .setCallback(new FutureCallback<JsonObject>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonObject result) {
+//                          Log.d("oo", result.toString());
+                            loadBackdrop();
+                            collapsingToolbar.setTitle(result.get("name").getAsString());
+                            author.setText(result.get("email").getAsString());
+                            instrument.setText("Guitar, Drums");
+                            location.setText("Mumbai, Pune");
+                            try{
+                                quote.setText(result.get("description").getAsString());
+                            } catch (NullPointerException z) {
+                            }
+                        }
+                    });
         }
 
         setHasOptionsMenu(true);
@@ -76,35 +89,18 @@ public class ArticleDetailFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflateAndBind(inflater, container, R.layout.fragment_article_detail);
+        View rootView = inflateAndBind(inflater, container, R.layout.fragment_view_profile);
 
         if (!((BaseActivity) getActivity()).providesActivityToolbar()) {
             // No Toolbar present. Set include_toolbar:
             ((BaseActivity) getActivity()).setToolbar((Toolbar) rootView.findViewById(R.id.toolbar));
         }
 
-        if (dummyItem != null) {
-            loadBackdrop();
-            collapsingToolbar.setTitle(dummyItem.author);
-            author.setText(dummyItem.title);
-            quote.setText(dummyItem.content);
-            location.setText(dummyItem.location);
-        }
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent detailIntent = new Intent(getActivity(), ViewProfileActivity.class);
-                detailIntent.putExtra(ViewProfileFragment.ARG_ITEM_ID, 0);
-                startActivity(detailIntent);
-            }
-        });
-
         return rootView;
     }
 
     private void loadBackdrop() {
-        Glide.with(this).load(dummyItem.photoId).centerCrop().into(backdropImg);
+        Glide.with(this).load(2130837625).centerCrop().into(backdropImg);
     }
 
     @Override
@@ -122,13 +118,13 @@ public class ArticleDetailFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public static ArticleDetailFragment newInstance(String itemID) {
-        ArticleDetailFragment fragment = new ArticleDetailFragment();
+    public static ViewProfileFragment newInstance(String itemID) {
+        ViewProfileFragment fragment = new ViewProfileFragment();
         Bundle args = new Bundle();
-        args.putString(ArticleDetailFragment.ARG_ITEM_ID, itemID);
+        args.putString(ViewProfileFragment.ARG_ITEM_ID, itemID);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ArticleDetailFragment() {}
+    public ViewProfileFragment() {}
 }

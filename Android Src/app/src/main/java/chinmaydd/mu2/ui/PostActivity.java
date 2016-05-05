@@ -26,7 +26,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 import chinmaydd.mu2.R;
-//import DummyContent;
 import chinmaydd.mu2.ui.base.BaseActivity;
 import chinmaydd.mu2.ui.quote.ArticleDetailActivity;
 import chinmaydd.mu2.ui.quote.ArticleDetailFragment;
@@ -54,8 +53,9 @@ public class PostActivity extends BaseActivity implements ArticleListFragment.Ca
 //                        .setAction("Action", null).show();
 //            }
 //        });
+
         Button button = (Button) findViewById(R.id.post);
-        final String url = "http://10.0.2.2:3000/posts/";
+        final String url = "http://172.20.10.2:3000/posts/";
         final String username = Global.UserName;
         final String email = Global.Email;
 
@@ -67,6 +67,7 @@ public class PostActivity extends BaseActivity implements ArticleListFragment.Ca
 
                 EditText title = (EditText) findViewById(R.id.title);
                 EditText desc = (EditText) findViewById(R.id.desc);
+                EditText location = (EditText) findViewById(R.id.location);
 
                 JSONObject params = new JSONObject();
                 try {
@@ -74,6 +75,7 @@ public class PostActivity extends BaseActivity implements ArticleListFragment.Ca
                     params.put("description", desc.getText().toString());
                     params.put("email", email);
                     params.put("user", username);
+                    params.put("location", location.getText().toString());
 
                     Log.d("check params", params.toString());
 

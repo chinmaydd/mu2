@@ -5,16 +5,30 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @search_results = @posts.map{ |p|
+      j = JSON.parse(p.to_json)
+      j["user"] = JSON.parse(p.postable.to_json)
+      j
+    }
+    puts @search_results
+    render json: {posts: @search_results}
+  end
+
+  def search
+    @posts = Post.all
+    s = params["string"]
+    @search_results = []
+    @posts.map{ |p|
+      if p.title.include? s or p.description.include? s
         j = JSON.parse(p.to_json)
-        begin
-          j["user"] = JSON.parse(p.postable.to_json)
-        rescue JSON::ParserError
-          j["user"] = {"name": "TestUser"}
-        end
-        j
+        j["user"] = JSON.parse(p.postable.to_json)
+        @search_results << j
+      else
+        next
+      end
     }
     render json: {posts: @search_results}
   end
+
 
   # GET /posts/1
   def show
@@ -24,6 +38,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
+    @post.location = params["location"]
 
     if User.where(:name => params["user"]).first.nil?
       author = User.new

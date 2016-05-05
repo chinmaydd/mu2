@@ -50,7 +50,6 @@ public class ArticleListFragment extends ListFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-//        DummyContent.ITEMS.add();
         super.onCreate(savedInstanceState);
         setListAdapter(new MyListAdapter());
         setHasOptionsMenu(true);

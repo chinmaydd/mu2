@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202085510) do
+ActiveRecord::Schema.define(version: 20160421094154) do
 
   create_table "bands", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
+    t.string   "email"
     t.integer  "contact_number"
     t.text     "favorite_artists"
     t.text     "awards"
@@ -25,8 +26,11 @@ ActiveRecord::Schema.define(version: 20160202085510) do
     t.integer  "postable_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "instrument"
+    t.string   "location"
   end
 
+  add_index "bands", ["email"], name: "index_bands_on_email", unique: true
   add_index "bands", ["postable_type", "postable_id"], name: "index_bands_on_postable_type_and_postable_id"
 
   create_table "jobs", force: :cascade do |t|
@@ -39,14 +43,18 @@ ActiveRecord::Schema.define(version: 20160202085510) do
 
   create_table "musicians", force: :cascade do |t|
     t.string   "name"
+    t.string   "email"
     t.text     "description"
     t.integer  "contact_number"
     t.string   "postable_type"
     t.integer  "postable_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "instrument"
+    t.string   "location"
   end
 
+  add_index "musicians", ["email"], name: "index_musicians_on_email", unique: true
   add_index "musicians", ["postable_type", "postable_id"], name: "index_musicians_on_postable_type_and_postable_id"
 
   create_table "posts", force: :cascade do |t|
@@ -59,6 +67,7 @@ ActiveRecord::Schema.define(version: 20160202085510) do
     t.integer  "postable_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "location"
   end
 
   add_index "posts", ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
@@ -72,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160202085510) do
     t.datetime "updated_at",    null: false
   end
 
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["postable_type", "postable_id"], name: "index_users_on_postable_type_and_postable_id"
 
 end

@@ -63,8 +63,7 @@ public class ListActivity extends BaseActivity implements ArticleListFragment.Ca
 
         DummyContent.ITEMS.clear();
 
-//        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:3000/posts/";
+        String url = "http://172.20.10.2:3000/posts/";
 
         Ion.with(this)
                 .load(url)
@@ -79,7 +78,7 @@ public class ListActivity extends BaseActivity implements ArticleListFragment.Ca
                             for (int i = 0; i < j.size(); i++) {
                                 JsonObject json_data = j.get(i).getAsJsonObject();
                                 JsonObject user_data = json_data.get("user").getAsJsonObject();
-                                DummyContent.ITEMS.add(new DummyContent.DummyItem(Integer.toString(i), R.drawable.p1, json_data.get("title").getAsString(), user_data.get("name").getAsString(), json_data.get("description").getAsString()));
+                                DummyContent.ITEMS.add(new DummyContent.DummyItem(Integer.toString(i), R.drawable.p1, json_data.get("title").getAsString(), user_data.get("name").getAsString(), json_data.get("description").getAsString(), json_data.get("location").getAsString()));
                             }
 
                             if(newString!= null && !newString.equals("True")) {
@@ -88,65 +87,12 @@ public class ListActivity extends BaseActivity implements ArticleListFragment.Ca
                                 finish();
                                 startActivity(intent);
                             }
+
                         } catch (Exception err) {
                             Log.i("Error", err.toString());
                         }
                     }
                 });
-
-        ////////////////////////////////////////// Future Requests ////////////////////////////////////////////
-//        RequestFuture<JSONObject> future = RequestFuture.newFuture();
-//        int REQUEST_TIMEOUT = 5;
-//        JsonObjectRequest jsobj = new JsonObjectRequest(Request.Method.GET, url, null, future, future);
-//        queue.add(jsobj);
-//
-//        try {
-//            JSONObject response = future.get(REQUEST_TIMEOUT, TimeUnit.SECONDS);
-//            JSONArray jArray = response.getJSONArray("posts");
-//
-//            for(int i=0;i<jArray.length(); i++) {
-//                JSONObject json_data = jArray.getJSONObject(i);
-//                        Log.i("See data: ", json_data.toString());
-//                JSONObject user_data = json_data.getJSONObject("user");
-//                DummyContent.ITEMS.add(new DummyContent.DummyItem(Integer.toString(i), R.drawable.p1, json_data.getString("title"), user_data.getString("name"), json_data.getString("description")));
-//            }
-//        } catch (InterruptedException e) {
-//        } catch (ExecutionException e) {
-//        } catch (JSONException e) {
-//        } catch (TimeoutException e) {
-//        }
-//
-
-
-        /////////////////////////////////// Volley Reqests ////////////////////////////////////////////////////////////////////
-//        JsonObjectRequest jsobj = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                try {
-////                    Log.i("here", response.toString());
-//                    JSONArray jArray = response.getJSONArray("posts");
-//
-//                    for(int i=0;i<jArray.length(); i++) {
-//                        JSONObject json_data = jArray.getJSONObject(i);
-////                        Log.i("See data: ", json_data.toString());
-//                        JSONObject user_data = json_data.getJSONObject("user");
-//                        DummyContent.ITEMS.add(new DummyContent.DummyItem(Integer.toString(i), R.drawable.p1, json_data.getString("title"), user_data.getString("name"),json_data.getString("description")));
-//                    }
-//                } catch(Exception e) {
-//                    Log.i("Error", e.toString());
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                // TODO Auto-generated method stub
-//
-//            }
-//        });
-//        queue.add(jsobj);
-
-
         setupToolbar();
 
         if (isTwoPaneLayoutUsed()) {

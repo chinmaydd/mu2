@@ -1,16 +1,29 @@
-# AggregatorAppForMusicians
+# mu2
 
-A social-network like (web)application for musicians and bands alike
+A social-network like application for musicians and bands alike.
 
-The project aims to develop an all­in­one application for musicians around India. The application should serve(almost) a complete social network for vocalists, drummers and guitarists alike. A similar app does exists but not for India.
-As we all know, India is home to a lot of budding musicians and there are lot of opportunities in metropolitan cities like Mumbai, Bangalore, etc. The app should function similar to a social network.
+The project aims to develop an all­in­one application for musicians around India. The application should serve(almost) a complete social network for vocalists, drummers and guitarists alike. As we all know, India is home to a lot of budding musicians and there are lot of opportunities in metropolitan cities like Mumbai, Bangalore, etc. The app should function similar to a social network. You can add posts and view profiles.
 
-The main​features​of the app will be:
+This project was developed as a part of our Software Engineering course so you can also find the Design Document attached. 
 
-­ Clients, who require top­quality talent can do a simple look­up in the application and find all such musicians who are available during the given time without any hassles. If no one is available, they can put up a request on the "Wall" and interested people can respond.
+## Usage Instructions
 
-­ Musicians, in need a job can check the "Wall" and find a gig. Users can also team up with others and set up performances.
+#### Rails
 
-­ We will be incorporating location based search based on the current location of the user. This will ensure filtered results for searches.
+The backend server is written in Rails and uses 5.0.0.beta3. The app is API based. You can start the Rails server by running ``bin/rails s ``.
 
-­ A musician can create his profile and provide links to previous performances. After viewing a given performance, the client will be given an option to rate and give reviews for a particular musician. We can also add Bands as a prospective user.
+### Android
+
+If you are testing it locally on the AVD Emulator, make sure to change all URLs in the source to `10.0.2.2:3000`. That way, the server will communicate with the application.
+
+## Contributions
+
+The application right now is not mature at all. There are (almost) no test cases and UI is buggy. The functionalities provided are minimal. 
+
+But this project is a nice example of communicating with an API server using Android. We would love contributions from all.
+
+## Acknowledgements
+
+We would like to thank [Andreas Schrade](https://github.com/andreasschrade) for his awesome Android Template project!
+
+If you want to use this as YOUR course project, feel free to do so.

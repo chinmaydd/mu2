@@ -5,8 +5,8 @@
     <string name="article_detail_more_info">More Info</string>
 
 
-    <string name="samples_title">Welcome :)</string>
-    <string name="samples_subhead">Hello!</string>
+    <string name="samples_title">Welcome to mu2:)</string>
+    <string name="samples_subhead">Please input your profile information!</string>
     <string name="samples_hint_username">Username</string>
     <string name="samples_hint_email">E-Mail</string>
 
@@ -19,5 +19,8 @@
     <!--<string name="navigation_sub_items">Other options</string>-->
     <!--<string name="navigation_dummy_item_1">1</string>-->
     <!--<string name="navigation_dummy_item_2">2</string>-->
-    <string name="title_activity_post">Profile Page</string>
+    <string name="title_activity_post">Create a new Post!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

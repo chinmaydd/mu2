@@ -10,6 +10,7 @@ class BandsController < ApplicationController
 
   # GET /bands/1
   def show
+    @band = Band.where(:email => params[:id]+"@gmail.com").first
     render json: @band
   end
 

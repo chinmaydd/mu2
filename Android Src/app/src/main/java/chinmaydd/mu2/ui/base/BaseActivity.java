@@ -14,7 +14,13 @@ import chinmaydd.mu2.R;
 import chinmaydd.mu2.ui.ProfileActivity;
 import chinmaydd.mu2.ui.SettingsActivity;
 import chinmaydd.mu2.ui.ViewSamplesActivity;
+import chinmaydd.mu2.ui.quote.ArticleDetailActivity;
+import chinmaydd.mu2.ui.quote.ArticleDetailFragment;
 import chinmaydd.mu2.ui.quote.ListActivity;
+import chinmaydd.mu2.ui.quote.ProfileDetails;
+import chinmaydd.mu2.ui.quote.ProfileDetailsClone;
+import chinmaydd.mu2.ui.quote.ViewProfileActivity;
+import chinmaydd.mu2.ui.quote.ViewProfileFragment;
 import chinmaydd.mu2.util.LogUtil;
 
 import static chinmaydd.mu2.util.LogUtil.logD;
@@ -114,10 +120,12 @@ public abstract class BaseActivity extends AppCompatActivity {
                 startActivity(new Intent(this, ViewSamplesActivity.class));
                 break;
             case R.id.nav_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
+                startActivity(new Intent(this, ProfileDetails.class));
                 break;
             case R.id.nav_profile:
-                startActivity(new Intent(this, ProfileActivity.class));
+                Intent detailIntent = new Intent(this, ViewProfileActivity.class);
+                detailIntent.putExtra(ViewProfileFragment.ARG_ITEM_ID, 0);
+                startActivity(detailIntent);
                 break;
         }
     }

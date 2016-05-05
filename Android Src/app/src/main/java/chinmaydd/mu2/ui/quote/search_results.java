@@ -14,8 +14,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import chinmaydd.mu2.R;
@@ -46,11 +46,21 @@ public class search_results extends BaseActivity implements ArticleListFragment.
         DummyContent2.ITEMS.clear();
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:3000/search/" + message;
-        JsonObjectRequest jsobj = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+        String url = "http://172.20.10.2:3000/posts/search";
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put("string", message);
+        } catch(JSONException j) {
+
+        }
+
+
+        JsonObjectRequest jsobj = new JsonObjectRequest(Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    Log.d("zz", response.toString());
                     JSONArray jArray = response.getJSONArray("posts");
 
                     for(int i=0;i<jArray.length(); i++) {

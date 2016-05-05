@@ -10,6 +10,7 @@ class MusiciansController < ApplicationController
 
   # GET /musicians/1
   def show
+    @user = Musician.where(["email LIKE ?", "#{temp}%"]).first
     render json: @musician
   end
 

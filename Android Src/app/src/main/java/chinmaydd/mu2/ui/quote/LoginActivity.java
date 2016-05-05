@@ -1,7 +1,9 @@
 package chinmaydd.mu2.ui.quote;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -102,9 +104,20 @@ public class LoginActivity extends FragmentActivity implements GoogleApiClient.O
 //            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
 //            updateUI(true);
 //            Log.d("Sign in account", acct.getDisplayName());
-            Intent myIntent = new Intent(this, ListActivity.class);
+            Intent myIntent = new Intent(this, ProfileDetailsClone.class);
+
+            SharedPreferences settings = getSharedPreferences("settings", MODE_PRIVATE);
+
+            // Set global variables
             Global.UserName = acct.getDisplayName();
             Global.Email = acct.getEmail();
+
+            // Set data on the phone so that we dont need to take user input every time.
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("email", acct.getEmail());
+            editor.putString("name", acct.getDisplayName());
+
+            editor.commit();
             startActivity(myIntent);
         } else {
             // Signed out, show unauthenticated UI.
