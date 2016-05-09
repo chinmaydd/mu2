@@ -38,7 +38,7 @@ public class ProfileDetails extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "http://172.20.10.2:3000/users/" + Global.Email.split("@")[0];
+                String url = "http://mu2.herokuapp.com/users/" + Global.Email.split("@")[0];
                 Log.d("url", url);
                 Ion.with(getApplicationContext())
                         .load(url)

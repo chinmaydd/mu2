@@ -54,21 +54,21 @@ public class ProfileDetailsClone extends AppCompatActivity {
                 EditText description = (EditText) findViewById(R.id.desc);
                 EditText instrument = (EditText) findViewById(R.id.instrument);
 
-                url = "http://172.20.10.2:3000/users/";
+                url = "http://mu2.herokuapp.com/users/";
 
                 try {
                     if (user_type.getSelectedItem().toString().equals("User")) {
-                        url = "http://172.20.10.2:3000/users/";
+                        url = "http://mu2.herokuapp.com/users/";
                     } else if (user_type.getSelectedItem().toString().equals("Musician")) {
                         json.put("location", location.getText().toString());
                         json.put("description", description.getText().toString());
                         json.put("instrument", instrument.getText().toString());
-                        url = "http://172.20.10.2:3000/musicians/";
+                        url = "http://mu2.herokuapp.com/musicians/";
                     } else {
                         json.put("location", location.getText().toString());
                         json.put("description", description.getText().toString());
                         json.put("instrument", instrument.getText().toString());
-                        url = "http://172.20.10.2:3000/bands/";
+                        url = "http://mu2.herokuapp.com/bands/";
                     }
 
                     json.put("name", Global.UserName);

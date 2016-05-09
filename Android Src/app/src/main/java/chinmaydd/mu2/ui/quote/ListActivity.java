@@ -63,7 +63,7 @@ public class ListActivity extends BaseActivity implements ArticleListFragment.Ca
 
         DummyContent.ITEMS.clear();
 
-        String url = "http://172.20.10.2:3000/posts/";
+        String url = "http://mu2.herokuapp.com/posts/";
 
         Ion.with(this)
                 .load(url)

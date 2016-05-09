@@ -55,7 +55,7 @@ public class PostActivity extends BaseActivity implements ArticleListFragment.Ca
 //        });
 
         Button button = (Button) findViewById(R.id.post);
-        final String url = "http://172.20.10.2:3000/posts/";
+        final String url = "http://mu2.herokuapp.com/posts/";
         final String username = Global.UserName;
         final String email = Global.Email;
 

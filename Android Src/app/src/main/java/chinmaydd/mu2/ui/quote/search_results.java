@@ -46,7 +46,7 @@ public class search_results extends BaseActivity implements ArticleListFragment.
         DummyContent2.ITEMS.clear();
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://172.20.10.2:3000/posts/search";
+        String url = "http://mu2.herokuapp.com/posts/search";
 
         JSONObject json = new JSONObject();
         try {
